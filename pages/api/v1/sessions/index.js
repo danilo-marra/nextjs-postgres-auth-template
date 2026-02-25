@@ -3,8 +3,7 @@ import controller from "infra/controller.js";
 import authentication from "models/authentication.js";
 import authorization from "models/authorization.js";
 import session from "models/session.js";
-
-import { ForbiddenError } from "infra/errors.js";
+import { ForbiddenError, UnauthorizedError } from "infra/errors";
 
 const router = createRouter();
 
@@ -40,7 +39,17 @@ async function postHandler(request, response) {
 async function deleteHandler(request, response) {
   const sessionToken = request.cookies.session_id;
 
-  const sessionObject = await session.findOneValidByToken(sessionToken);
+  let sessionObject;
+
+  try {
+    sessionObject = await session.findOneValidByToken(sessionToken);
+  } catch (error) {
+    throw new UnauthorizedError({
+      message: "Usuário não possui sessão ativa.",
+      action: "Verifique se este usuário está logado e tente novamente.",
+    });
+  }
+
   const expiredSession = await session.expireById(sessionObject.id);
   controller.clearSessionCookie(response);
 

@@ -64,8 +64,23 @@ async function clearSessionCookie(response) {
 
 async function injectAnonymousOrUser(request, response, next) {
   if (request.cookies?.session_id) {
-    await injectAuthenticatedUser(request);
-    return next();
+    try {
+      await injectAuthenticatedUser(request);
+      return next();
+    } catch (error) {
+      if (error instanceof UnauthorizedError) {
+        throw error;
+      }
+
+      if (error instanceof NotFoundError) {
+        throw new UnauthorizedError({
+          message: "Usuário não possui sessão ativa.",
+          action: "Verifique se este usuário está logado e tente novamente.",
+        });
+      }
+
+      throw error;
+    }
   }
 
   injectAnonymousUser(request);

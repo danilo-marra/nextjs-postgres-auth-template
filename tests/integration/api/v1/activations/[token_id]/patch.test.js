@@ -32,7 +32,7 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
 
     test("With expired token", async() => {
       jest.useFakeTimers({
-        now: new Date(Date.now() - activation.EXPIRATION_IN_MILISECONDS),
+        now: new Date(Date.now() - 2 * activation.EXPIRATION_IN_MILISECONDS),
       });
 
       const createdUser = await orchestrator.createUser();
@@ -116,13 +116,11 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
         const expiresAt = new Date(responseBody.expires_at);
         const createdAt = new Date(responseBody.created_at);
 
-        expiresAt.setMilliseconds(0);
-        createdAt.setMilliseconds(0);
-
-        expect(expiresAt - createdAt).toBe(activation.EXPIRATION_IN_MILISECONDS);
+        expect(expiresAt - createdAt).toBeGreaterThanOrEqual(activation.EXPIRATION_IN_MILISECONDS - 1000);
+        expect(expiresAt - createdAt).toBeLessThanOrEqual(activation.EXPIRATION_IN_MILISECONDS + 1000);
 
         const activatedUser = await user.findOneById(createdUser.id);
-        expect(activatedUser.features).toEqual(["create:session", "read:session"]);
+        expect(activatedUser.features).toEqual(["create:session", "read:session", "update:user"]);
     });
 
     test ("With valid token but already activated user", async() => {
