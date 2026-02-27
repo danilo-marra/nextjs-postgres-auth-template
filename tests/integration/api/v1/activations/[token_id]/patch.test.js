@@ -45,7 +45,7 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
       }
     );
 
-      expect(response.status).toBe(404);
+      expect(response.status).toBe(404); // not found
 
       const responseBody = await response.json();
 
