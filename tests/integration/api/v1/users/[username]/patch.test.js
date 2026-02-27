@@ -32,10 +32,10 @@ describe("PATCH /api/v1/[username]", () => {
       const responseBody = await response.json();
 
       expect(responseBody).toEqual({
-       action: "Verifique se o seu usuário possui a feature \"update:user\".",
-       message: "Você não possui permissão para executar esta ação.",
-       name: "ForbiddenError",
-       status_code: 403,
+        action: 'Verifique se o seu usuário possui a feature "update:user".',
+        message: "Você não possui permissão para executar esta ação.",
+        name: "ForbiddenError",
+        status_code: 403,
       });
     });
   });
@@ -52,7 +52,7 @@ describe("PATCH /api/v1/[username]", () => {
           method: "PATCH",
           headers: {
             Cookie: `session_id=${sessionObject.token}`,
-          }
+          },
         },
       );
 
@@ -78,7 +78,9 @@ describe("PATCH /api/v1/[username]", () => {
       });
 
       const activatedUser2 = await orchestrator.activateUser(createdUser2);
-      const sessionObject2 = await orchestrator.createSession(activatedUser2.id);
+      const sessionObject2 = await orchestrator.createSession(
+        activatedUser2.id,
+      );
 
       const response = await fetch("http://localhost:3000/api/v1/users/user2", {
         method: "PATCH",
@@ -112,7 +114,9 @@ describe("PATCH /api/v1/[username]", () => {
       });
 
       const activatedUserB = await orchestrator.activateUser(createdUserB);
-      const sessionObject2 = await orchestrator.createSession(activatedUserB.id);
+      const sessionObject2 = await orchestrator.createSession(
+        activatedUserB.id,
+      );
 
       const response = await fetch("http://localhost:3000/api/v1/users/userA", {
         method: "PATCH",
@@ -129,7 +133,8 @@ describe("PATCH /api/v1/[username]", () => {
 
       const responseBody = await response.json();
       expect(responseBody).toEqual({
-        action: "Verifique se você possui a feature necessária para atualizar outro usuário.",
+        action:
+          "Verifique se você possui a feature necessária para atualizar outro usuário.",
         message: "Você não possui permissão para atualizar outro usuário.",
         name: "ForbiddenError",
         status_code: 403,
@@ -146,7 +151,9 @@ describe("PATCH /api/v1/[username]", () => {
       });
 
       const activatedUser2 = await orchestrator.activateUser(createdUser2);
-      const sessionObject2 = await orchestrator.createSession(activatedUser2.id);
+      const sessionObject2 = await orchestrator.createSession(
+        activatedUser2.id,
+      );
 
       const response = await fetch(
         `http://localhost:3000/api/v1/users/${createdUser2.username}`,
