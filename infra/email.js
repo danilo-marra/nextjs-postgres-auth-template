@@ -19,8 +19,8 @@ async function send(mailOptions) {
       message: "Não foi possível enviar o email",
       action: "Verifique se o serviço de email está disponível",
       cause: error,
-      context: mailOptions
-    })
+      context: mailOptions,
+    });
   }
 }
 
