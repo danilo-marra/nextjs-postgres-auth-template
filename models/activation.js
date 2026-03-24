@@ -65,15 +65,15 @@ async function create(userId) {
 
 async function sendEmailToUser(user, activationToken) {
   await email.send({
-    from: "FinTab <contato@fintab.com.br>",
+    from: "EspacoDialogico <contato@espacodialogico.com.br>",
     to: user.email,
-    subject: "Ative seu cadastro no FinTab!",
-    text: `${user.username}, clique no link abaixo para ativar seu cadastro no FinTab:
+    subject: "Ative seu cadastro no EspacoDialogico!",
+    text: `${user.username}, clique no link abaixo para ativar seu cadastro no EspacoDialogico:
 
 ${webserver.origin}/cadastro/ativar/${activationToken.id}
 
 Atenciosamente, 
-Equipe FinTab`,
+Equipe EspacoDialogico`,
   });
 }
 
