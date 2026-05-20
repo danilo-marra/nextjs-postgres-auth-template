@@ -64,16 +64,20 @@ async function create(userId) {
 }
 
 async function sendEmailToUser(user, activationToken) {
+  const appName = process.env.APP_NAME;
+  const appEmail = process.env.APP_EMAIL;
+  const activationPath = process.env.ACTIVATION_PATH || "/activate";
+
   await email.send({
-    from: "EspacoDialogico <contato@espacodialogico.com.br>",
+    from: `${appName} <${appEmail}>`,
     to: user.email,
-    subject: "Ative seu cadastro no EspacoDialogico!",
-    text: `${user.username}, clique no link abaixo para ativar seu cadastro no EspacoDialogico:
+    subject: `Activate your account on ${appName}!`,
+    text: `${user.username}, click the link below to activate your account on ${appName}:
 
-${webserver.origin}/cadastro/ativar/${activationToken.id}
+${webserver.origin}${activationPath}/${activationToken.id}
 
-Atenciosamente, 
-Equipe EspacoDialogico`,
+Best regards,
+${appName} Team`,
   });
 }
 

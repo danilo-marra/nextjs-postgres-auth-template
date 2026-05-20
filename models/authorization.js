@@ -1,6 +1,6 @@
 import { InternalServerError } from "infra/errors.js";
 
-const avaibleFeatures = [
+const availableFeatures = [
   //User
   "create:user",
   "read:user",
@@ -49,16 +49,6 @@ function filterOutput(user, feature, resource) {
   validateUser(user);
   validateFeature(feature);
   validateResource(resource);
-
-  if (feature === "read:user") {
-    return {
-      id: resource.id,
-      username: resource.username,
-      features: resource.features,
-      created_at: resource.created_at,
-      updated_at: resource.updated_at,
-    };
-  }
 
   if (feature === "read:user") {
     return {
@@ -156,7 +146,7 @@ function validateUser(user) {
 }
 
 function validateFeature(feature) {
-  if (!feature || !avaibleFeatures.includes(feature)) {
+  if (!feature || !availableFeatures.includes(feature)) {
     throw new InternalServerError({
       cause:
         "É necessário fornecer um `feature` válido no model `authorization`.",

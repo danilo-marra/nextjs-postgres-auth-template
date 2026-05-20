@@ -7,7 +7,7 @@ function getOrigin() {
     return `https://${process.env.VERCEL_URL}`;
   }
 
-  return "https://espaco-dialogico.vercel.app/";
+  return process.env.PRODUCTION_URL;
 }
 
 const webserver = {

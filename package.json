@@ -1,7 +1,7 @@
 {
-  "name": "clone-tabnews",
+  "name": "nextjs-postgres-auth-template",
   "version": "1.0.0",
-  "description": "Implementação do https://www.tabnews.com.br para o https://curso.dev",
+  "description": "A Next.js + PostgreSQL starter template with authentication, sessions, RBAC, and email activation.",
   "main": "index.js",
   "scripts": {
     "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
