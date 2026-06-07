@@ -11,8 +11,8 @@ async function getAuthenticatedUser(providedEmail, providedPassword) {
   } catch (error) {
     if (error instanceof UnauthorizedError) {
       throw new UnauthorizedError({
-        message: "Dados de auntenticação não conferem.",
-        action: "Verifique se os dados enviados estão corretos.",
+        message: "Authentication data does not match.",
+        action: "Check if the submitted data is correct.",
       });
     }
 
@@ -27,8 +27,8 @@ async function getAuthenticatedUser(providedEmail, providedPassword) {
     } catch (error) {
       if (error instanceof NotFoundError) {
         throw new UnauthorizedError({
-          message: "Email não confere.",
-          action: "Verifique se este dado está correto.",
+          message: "Email does not match.",
+          action: "Check if this value is correct.",
         });
       }
 
@@ -45,8 +45,8 @@ async function getAuthenticatedUser(providedEmail, providedPassword) {
 
     if (!correctPasswordMatch) {
       throw new UnauthorizedError({
-        message: "Senha não confere.",
-        action: "Verifique se este dado está correto.",
+        message: "Password does not match.",
+        action: "Check if this value is correct.",
       });
     }
   }

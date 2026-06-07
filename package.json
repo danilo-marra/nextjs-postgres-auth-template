@@ -4,9 +4,9 @@
   "description": "A Next.js + PostgreSQL starter template with authentication, sessions, RBAC, and email activation.",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev",
+    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && next dev --turbopack",
     "pretest": "kill-port 3000",
-    "test": "npm run services:up && npm run services:wait:database && concurrently -n next,jest --hide next -k -s command-jest \"cross-env NODE_ENV=development next dev\" \"cross-env NODE_ENV=test jest --runInBand --verbose\"",
+    "test": "npm run services:up && npm run services:wait:database && concurrently -n next,jest --hide next -k -s command-jest \"cross-env NODE_ENV=development next dev --turbopack\" \"cross-env NODE_ENV=test jest --runInBand --verbose\"",
     "posttest": "npm run services:stop",
     "test:watch": "jest --watchAll --runInBand --verbose",
     "services:up": "docker compose -f infra/compose.yaml up -d",

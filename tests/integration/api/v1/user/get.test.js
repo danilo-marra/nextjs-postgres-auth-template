@@ -20,8 +20,8 @@ describe("GET /api/v1/user", () => {
 
       expect(responseBody).toEqual({
         name: "ForbiddenError",
-        message: "Você não possui permissão para executar esta ação.",
-        action: `Verifique se o seu usuário possui a feature "read:session".`,
+        message: "You do not have permission to perform this action.",
+        action: `Check if your user has the "read:session" feature.`,
         status_code: 403,
       });
     });
@@ -105,8 +105,8 @@ describe("GET /api/v1/user", () => {
 
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Usuário não possui sessão ativa.",
-        action: "Verifique se este usuário está logado e tente novamente.",
+        message: "User does not have an active session.",
+        action: "Check if this user is logged in and try again.",
         status_code: 401,
       });
 
@@ -150,8 +150,8 @@ describe("GET /api/v1/user", () => {
 
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Usuário não possui sessão ativa.",
-        action: "Verifique se este usuário está logado e tente novamente.",
+        message: "User does not have an active session.",
+        action: "Check if this user is logged in and try again.",
         status_code: 401,
       });
 
@@ -170,7 +170,7 @@ describe("GET /api/v1/user", () => {
     });
 
     test("With a session about to expire", async () => {
-      // 1. Inicie com o tempo real para criar a sessão normalmente
+      // 1. Start with real timers to create the session normally
       jest.useFakeTimers({ doNotFake: ["nextTick", "setImmediate"] });
 
       const createdUser = await orchestrator.createUser({
@@ -181,7 +181,7 @@ describe("GET /api/v1/user", () => {
 
       const sessionObject = await orchestrator.createSession(createdUser.id);
 
-      // 2. Avance o tempo para perto da expiração
+      // 2. Advance time close to expiration
       jest.advanceTimersByTime(session.EXPIRATION_IN_MILISECONDS - 1000);
 
       const response = await fetch("http://localhost:3000/api/v1/user", {
@@ -232,7 +232,7 @@ describe("GET /api/v1/user", () => {
         httpOnly: true,
       });
 
-      // Restaure os timers reais apenas no final
+      // Restore real timers only at the end
       jest.useRealTimers();
     });
   });

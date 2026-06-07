@@ -140,7 +140,7 @@ function filterOutput(user, feature, resource) {
 function validateUser(user) {
   if (!user || !user.features) {
     throw new InternalServerError({
-      cause: "É necessário fornecer `user` no model `authorization`.",
+      cause: "`user` is required in the `authorization` model.",
     });
   }
 }
@@ -148,8 +148,7 @@ function validateUser(user) {
 function validateFeature(feature) {
   if (!feature || !availableFeatures.includes(feature)) {
     throw new InternalServerError({
-      cause:
-        "É necessário fornecer um `feature` válido no model `authorization`.",
+      cause: "A valid `feature` is required in the `authorization` model.",
     });
   }
 }
@@ -157,8 +156,7 @@ function validateFeature(feature) {
 function validateResource(resource) {
   if (!resource) {
     throw new InternalServerError({
-      cause:
-        "É necessário fornecer um `resource` em `authorization.filterOutput().`",
+      cause: "`resource` is required in `authorization.filterOutput()`.",
     });
   }
 }

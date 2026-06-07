@@ -24,8 +24,8 @@ async function findOneByUsername(username) {
 
     if (results.rowCount === 0) {
       throw new NotFoundError({
-        message: "Usuário não encontrado.",
-        action: "Verifique se o username informado está correto.",
+        message: "User not found.",
+        action: "Check if the provided username is correct.",
       });
     }
 
@@ -55,8 +55,8 @@ async function findOneByEmail(email) {
 
     if (results.rowCount === 0) {
       throw new NotFoundError({
-        message: "O email informado não foi encontrado no sistema.",
-        action: "Verifique se o email informado está correto.",
+        message: "Email not found.",
+        action: "Check if the provided email is correct.",
       });
     }
 
@@ -86,8 +86,8 @@ async function findOneById(id) {
 
     if (results.rowCount === 0) {
       throw new NotFoundError({
-        message: "O id informado não foi encontrado no sistema.",
-        action: "Verifique se o ID informado está correto.",
+        message: "ID not found.",
+        action: "Check if the provided ID is correct.",
       });
     }
 
@@ -195,8 +195,8 @@ async function validateUniqueUsername(username) {
 
   if (results.rowCount > 0) {
     throw new ValidationError({
-      message: "O username informado já está sendo utilizado.",
-      action: "Utilize outro username para realizar esta operação.",
+      message: "This username is already in use.",
+      action: "Use a different username for this operation.",
     });
   }
 }
@@ -216,8 +216,8 @@ async function validateUniqueEmail(email) {
 
   if (results.rowCount > 0) {
     throw new ValidationError({
-      message: "O email informado já está sendo utilizado.",
-      action: "Utilize outro email para realizar esta operação.",
+      message: "This email is already in use.",
+      action: "Use a different email for this operation.",
     });
   }
 }
