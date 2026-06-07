@@ -15,6 +15,10 @@ const availableFeatures = [
   //ActivationToken
   "read:activation_token",
 
+  //PasswordResetToken
+  "create:password_reset_token",
+  "read:password_reset_token",
+
   //Migration
   "read:migration",
   "create:migration",
@@ -87,6 +91,17 @@ function filterOutput(user, feature, resource) {
   }
 
   if (feature === "read:activation_token") {
+    return {
+      id: resource.id,
+      user_id: resource.user_id,
+      created_at: resource.created_at,
+      updated_at: resource.updated_at,
+      expires_at: resource.expires_at,
+      used_at: resource.used_at,
+    };
+  }
+
+  if (feature === "read:password_reset_token") {
     return {
       id: resource.id,
       user_id: resource.user_id,

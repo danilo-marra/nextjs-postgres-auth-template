@@ -109,12 +109,20 @@ async function expireById(sessionId) {
   }
 }
 
+async function deleteAllByUserId(userId) {
+  await database.query({
+    text: `DELETE FROM sessions WHERE user_id = $1`,
+    values: [userId],
+  });
+}
+
 const session = {
   create,
   EXPIRATION_IN_MILISECONDS,
   findOneValidByToken,
   renew,
   expireById,
+  deleteAllByUserId,
 };
 
 export default session;

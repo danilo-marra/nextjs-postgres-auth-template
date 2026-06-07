@@ -6,6 +6,7 @@ import migrator from "models/migrator.js";
 import user from "models/user.js";
 import session from "models/session";
 import activation from "models/activation.js";
+import passwordReset from "models/password-reset.js";
 
 const emailHttpUrl = `http://${process.env.EMAIL_HTTP_HOST}:${process.env.EMAIL_HTTP_PORT}`;
 
@@ -103,6 +104,10 @@ async function addFeaturesToUser(userObject, features) {
   return updatedUser;
 }
 
+async function createPasswordResetToken(userObject) {
+  return await passwordReset.create(userObject.email);
+}
+
 const orchestrator = {
   waitForAllServices,
   clearDatabase,
@@ -114,6 +119,7 @@ const orchestrator = {
   extractUUID,
   activateUser,
   addFeaturesToUser,
+  createPasswordResetToken,
 };
 
 export default orchestrator;
