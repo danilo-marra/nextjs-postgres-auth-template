@@ -47,15 +47,15 @@ describe("Use case: Registration flow (all successful)", () => {
   test("Receive activation email", async () => {
     const lastEmail = await orchestrator.getLastEmail();
 
-    expect(lastEmail.sender).toBe("<contato@espacodialogico.com.br>");
+    expect(lastEmail.sender).toBe("<no-reply@template.com>");
     expect(lastEmail.recipients[0]).toBe("<registration.flow@curso.dev>");
-    expect(lastEmail.subject).toBe("Ative seu cadastro no EspacoDialogico!");
+    expect(lastEmail.subject).toBe("Activate your account on Template!");
     expect(lastEmail.text).toContain("RegistrationFlow");
 
     activationTokenId = orchestrator.extractUUID(lastEmail.text);
 
     expect(lastEmail.text).toContain(
-      `${webserver.origin}/cadastro/ativar/${activationTokenId}`,
+      `${webserver.origin}/activate/${activationTokenId}`,
     );
 
     const activationTokenObject =

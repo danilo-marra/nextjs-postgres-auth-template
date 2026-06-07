@@ -127,6 +127,7 @@ describe("GET /api/v1/user", () => {
     test("With expired session", async () => {
       jest.useFakeTimers({
         now: new Date(Date.now() - session.EXPIRATION_IN_MILISECONDS),
+        doNotFake: ["nextTick", "setImmediate"],
       });
 
       const createdUser = await orchestrator.createUser({
@@ -170,7 +171,7 @@ describe("GET /api/v1/user", () => {
 
     test("With a session about to expire", async () => {
       // 1. Inicie com o tempo real para criar a sessão normalmente
-      jest.useFakeTimers();
+      jest.useFakeTimers({ doNotFake: ["nextTick", "setImmediate"] });
 
       const createdUser = await orchestrator.createUser({
         username: "UserWithExpiringSession",
