@@ -4,7 +4,7 @@ A production-ready Next.js starter with PostgreSQL, cookie-based sessions, role-
 
 ## Features
 
-- **Next.js 14** (Pages Router + API Routes)
+- **Next.js 15** (Pages Router + API Routes)
 - **PostgreSQL 16** with raw parameterized SQL via `pg` (no ORM)
 - **Schema migrations** with `node-pg-migrate`
 - **Cookie sessions** — `httpOnly`, 30-day expiry, stored in the database
@@ -19,7 +19,7 @@ A production-ready Next.js starter with PostgreSQL, cookie-based sessions, role-
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 24
 - Docker & Docker Compose
 
 ### Setup
@@ -75,6 +75,7 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 | `APP_NAME`            | Application name (used in emails)       | —           |
 | `APP_EMAIL`           | Sender email address                    | —           |
 | `ACTIVATION_PATH`     | Path for activation links               | `/activate` |
+| `PASSWORD_RESET_PATH` | Path for password reset links           | `/password/reset` |
 | `PRODUCTION_URL`      | Full production URL                     | —           |
 
 ## Available Scripts
@@ -86,11 +87,15 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 | `npm run test:watch`          | Run tests in watch mode                                |
 | `npm run migrations:create`   | Create a new migration file                            |
 | `npm run migrations:up`       | Apply pending migrations                               |
+| `npm run migrations:up:dry`   | Dry-run pending migrations                             |
 | `npm run migrations:status`   | Show migration status                                  |
 | `npm run services:up`         | Start Docker services                                  |
+| `npm run services:stop`       | Stop Docker services (keep containers)                 |
 | `npm run services:down`       | Stop and remove Docker services                        |
 | `npm run lint:prettier:check` | Check formatting                                       |
 | `npm run lint:prettier:fix`   | Fix formatting                                         |
+| `npm run lint:eslint:check`   | Run ESLint                                             |
+| `npm run check-secrets`       | Scan for secrets with Secretlint                       |
 | `npm run commit`              | Commit with Commitizen                                 |
 
 ## Project Structure
@@ -112,11 +117,19 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 │   ├── authorization.js    # RBAC engine
 │   ├── migrator.js         # Migration runner
 │   ├── password.js         # bcrypt helpers
+│   ├── password-reset.js   # Password reset token logic
 │   ├── session.js          # Session CRUD
 │   └── user.js             # User CRUD
 ├── pages/
 │   ├── index.js
 │   └── api/v1/             # REST API routes
+│       ├── activations/    # Account activation
+│       ├── migrations/     # Migration runner endpoint
+│       ├── password/reset/ # Password reset flow
+│       ├── sessions/       # Login / logout
+│       ├── status/         # Health check
+│       ├── user/           # Authenticated user profile
+│       └── users/          # User registration & management
 └── tests/
     ├── orchestrator.js     # Test utilities (DB reset, factories)
     └── integration/        # Integration tests
