@@ -16,7 +16,7 @@ async function query(queryObject) {
     return result;
   } catch (error) {
     const serviceErrorObject = new ServiceError({
-      message: "Erro na conexão com o Banco ou na Query.",
+      message: "Database connection or query error.",
       cause: error,
     });
     throw serviceErrorObject;
@@ -28,9 +28,14 @@ async function getNewClient() {
   return client;
 }
 
+async function end() {
+  await pool.end();
+}
+
 const database = {
   query,
   getNewClient,
+  end,
 };
 
 export default database;

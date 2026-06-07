@@ -36,9 +36,9 @@ async function patchHandler(request, response) {
 
   if (!authorization.can(userTryingToPatch, "update:user", targetUser)) {
     throw new ForbiddenError({
-      message: "Você não possui permissão para atualizar outro usuário.",
+      message: "You do not have permission to update another user.",
       action:
-        "Verifique se você possui a feature necessária para atualizar outro usuário.",
+        "Check if your user has the required feature to update another user.",
     });
   }
   const updatedUser = await user.update(username, userInputValues);

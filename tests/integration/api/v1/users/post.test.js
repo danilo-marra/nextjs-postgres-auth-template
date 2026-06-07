@@ -85,8 +85,8 @@ describe("POST /api/v1/users", () => {
       const response2Body = await response2.json();
       expect(response2Body).toEqual({
         name: "ValidationError",
-        message: "O email informado já está sendo utilizado.",
-        action: "Utilize outro email para realizar esta operação.",
+        message: "This email is already in use.",
+        action: "Use a different email for this operation.",
         status_code: 400,
       });
       // 409 - conflict
@@ -127,8 +127,8 @@ describe("POST /api/v1/users", () => {
       const response2Body = await response2.json();
       expect(response2Body).toEqual({
         name: "ValidationError",
-        message: "O username informado já está sendo utilizado.",
-        action: "Utilize outro username para realizar esta operação.",
+        message: "This username is already in use.",
+        action: "Use a different username for this operation.",
         status_code: 400,
       });
     });
@@ -158,8 +158,8 @@ describe("POST /api/v1/users", () => {
 
       expect(user2ResponseBody).toEqual({
         name: "ForbiddenError",
-        message: "Você não possui permissão para executar esta ação.",
-        action: `Verifique se o seu usuário possui a feature "create:user".`,
+        message: "You do not have permission to perform this action.",
+        action: `Check if your user has the "create:user" feature.`,
         status_code: 403,
       });
     });

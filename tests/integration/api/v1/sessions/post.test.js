@@ -32,8 +32,8 @@ describe("POST /api/v1/sessions", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Dados de auntenticação não conferem.",
-        action: "Verifique se os dados enviados estão corretos.",
+        message: "Authentication data does not match.",
+        action: "Check if the submitted data is correct.",
         status_code: 401,
       });
     });
@@ -59,8 +59,8 @@ describe("POST /api/v1/sessions", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Dados de auntenticação não conferem.",
-        action: "Verifique se os dados enviados estão corretos.",
+        message: "Authentication data does not match.",
+        action: "Check if the submitted data is correct.",
         status_code: 401,
       });
     });
@@ -84,8 +84,8 @@ describe("POST /api/v1/sessions", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Dados de auntenticação não conferem.",
-        action: "Verifique se os dados enviados estão corretos.",
+        message: "Authentication data does not match.",
+        action: "Check if the submitted data is correct.",
         status_code: 401,
       });
     });

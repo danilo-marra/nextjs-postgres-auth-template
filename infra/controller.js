@@ -74,8 +74,8 @@ async function injectAnonymousOrUser(request, response, next) {
 
       if (error instanceof NotFoundError) {
         throw new UnauthorizedError({
-          message: "Usuário não possui sessão ativa.",
-          action: "Verifique se este usuário está logado e tente novamente.",
+          message: "User does not have an active session.",
+          action: "Check if this user is logged in and try again.",
         });
       }
 
@@ -118,8 +118,8 @@ function canRequest(feature) {
     }
 
     throw new ForbiddenError({
-      message: "Você não possui permissão para executar esta ação.",
-      action: `Verifique se o seu usuário possui a feature "${feature}".`,
+      message: "You do not have permission to perform this action.",
+      action: `Check if your user has the "${feature}" feature.`,
     });
   };
 }

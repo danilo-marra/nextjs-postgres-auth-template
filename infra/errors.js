@@ -1,10 +1,10 @@
 export class InternalServerError extends Error {
   constructor({ cause, statusCode }) {
-    super("Um erro interno não esperado aconteceu.", {
+    super("An unexpected internal error occurred.", {
       cause,
     });
     this.name = "InternalServerError";
-    this.action = "Entre em contato com o suporte.";
+    this.action = "Contact support.";
     this.statusCode = statusCode || 500;
   }
 
@@ -20,11 +20,11 @@ export class InternalServerError extends Error {
 
 export class ServiceError extends Error {
   constructor({ cause, message, action, context }) {
-    super(message || "Serviço indisponível no momento.", {
+    super(message || "Service unavailable.", {
       cause,
     });
     this.name = "ServiceError";
-    this.action = action || "Verifique se o serviço está disponível.";
+    this.action = action || "Check if the service is available.";
     this.statusCode = 503;
     this.context = context;
   }
@@ -42,11 +42,11 @@ export class ServiceError extends Error {
 
 export class ValidationError extends Error {
   constructor({ cause, message, action }) {
-    super(message || "Um erro de  validação ocorreu.", {
+    super(message || "A validation error occurred.", {
       cause,
     });
     this.name = "ValidationError";
-    this.action = action || "Corrija os dados e tente novamente.";
+    this.action = action || "Correct the data and try again.";
     this.statusCode = 400;
   }
 
@@ -62,12 +62,11 @@ export class ValidationError extends Error {
 
 export class NotFoundError extends Error {
   constructor({ cause, message, action }) {
-    super(message || "Não foi possível encontrar este recurso no sistema.", {
+    super(message || "This resource could not be found.", {
       cause,
     });
     this.name = "NotFoundError";
-    this.action =
-      action || "Verifique se os parâmetros enviados na consulta estão certos.";
+    this.action = action || "Check if the query parameters are correct.";
     this.statusCode = 404;
   }
 
@@ -83,11 +82,11 @@ export class NotFoundError extends Error {
 
 export class UnauthorizedError extends Error {
   constructor({ cause, message, action }) {
-    super(message || "Usuário não autenticado.", {
+    super(message || "User not authenticated.", {
       cause,
     });
     this.name = "UnauthorizedError";
-    this.action = action || "Faça novamente o login para continuar.";
+    this.action = action || "Log in again to continue.";
     this.statusCode = 401;
   }
 
@@ -103,12 +102,11 @@ export class UnauthorizedError extends Error {
 
 export class ForbiddenError extends Error {
   constructor({ cause, message, action }) {
-    super(message || "Acesso negado.", {
+    super(message || "Access denied.", {
       cause,
     });
     this.name = "ForbiddenError";
-    this.action =
-      action || "Verifique as features necessárias antes de continuar.";
+    this.action = action || "Check the required features before continuing.";
     this.statusCode = 403;
   }
 
@@ -124,10 +122,9 @@ export class ForbiddenError extends Error {
 
 export class MethodNotAllowedError extends Error {
   constructor() {
-    super("Método não permitido para este endpoint.");
+    super("Method not allowed for this endpoint.");
     this.name = "MethodNotAllowedError";
-    this.action =
-      "Verifique se o método HTTP enviado é válido para este endpoint.";
+    this.action = "Check if the HTTP method used is valid for this endpoint.";
     this.statusCode = 405;
   }
 

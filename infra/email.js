@@ -16,8 +16,8 @@ async function send(mailOptions) {
     await transporter.sendMail(mailOptions);
   } catch (error) {
     throw new ServiceError({
-      message: "Não foi possível enviar o email",
-      action: "Verifique se o serviço de email está disponível",
+      message: "Failed to send email",
+      action: "Check if the email service is available",
       cause: error,
       context: mailOptions,
     });

@@ -26,8 +26,8 @@ async function findOneValidByToken(sessionToken) {
 
     if (results.rowCount === 0) {
       throw new UnauthorizedError({
-        message: "Usuário não possui sessão ativa.",
-        action: "Verifique se este usuário está logado e tente novamente.",
+        message: "User does not have an active session.",
+        action: "Check if this user is logged in and try again.",
       });
     }
 

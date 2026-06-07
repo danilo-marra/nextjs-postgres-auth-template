@@ -32,8 +32,8 @@ describe("PATCH /api/v1/[username]", () => {
       const responseBody = await response.json();
 
       expect(responseBody).toEqual({
-        action: 'Verifique se o seu usuário possui a feature "update:user".',
-        message: "Você não possui permissão para executar esta ação.",
+        action: 'Check if your user has the "update:user" feature.',
+        message: "You do not have permission to perform this action.",
         name: "ForbiddenError",
         status_code: 403,
       });
@@ -62,8 +62,8 @@ describe("PATCH /api/v1/[username]", () => {
 
       expect(responseBody).toEqual({
         name: "NotFoundError",
-        message: "Usuário não encontrado.",
-        action: "Verifique se o username informado está correto.",
+        message: "User not found.",
+        action: "Check if the provided username is correct.",
         status_code: 404,
       });
     });
@@ -98,8 +98,8 @@ describe("PATCH /api/v1/[username]", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "ValidationError",
-        message: "O username informado já está sendo utilizado.",
-        action: "Utilize outro username para realizar esta operação.",
+        message: "This username is already in use.",
+        action: "Use a different username for this operation.",
         status_code: 400,
       });
     });
@@ -134,8 +134,8 @@ describe("PATCH /api/v1/[username]", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         action:
-          "Verifique se você possui a feature necessária para atualizar outro usuário.",
-        message: "Você não possui permissão para atualizar outro usuário.",
+          "Check if your user has the required feature to update another user.",
+        message: "You do not have permission to update another user.",
         name: "ForbiddenError",
         status_code: 403,
       });
@@ -174,8 +174,8 @@ describe("PATCH /api/v1/[username]", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "ValidationError",
-        message: "O email informado já está sendo utilizado.",
-        action: "Utilize outro email para realizar esta operação.",
+        message: "This email is already in use.",
+        action: "Use a different email for this operation.",
         status_code: 400,
       });
     });

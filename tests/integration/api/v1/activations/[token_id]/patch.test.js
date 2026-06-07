@@ -25,9 +25,8 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
 
       expect(responseBody).toEqual({
         name: "NotFoundError",
-        message:
-          "O token de ativação utilizado não foi encontrado no sistema ou expirou.",
-        action: "Faça um novo cadastro.",
+        message: "Activation token not found or expired.",
+        action: "Please register again.",
         status_code: 404,
       });
     });
@@ -56,9 +55,8 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
 
       expect(responseBody).toEqual({
         name: "NotFoundError",
-        message:
-          "O token de ativação utilizado não foi encontrado no sistema ou expirou.",
-        action: "Faça um novo cadastro.",
+        message: "Activation token not found or expired.",
+        action: "Please register again.",
         status_code: 404,
       });
     });
@@ -88,9 +86,8 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
 
       expect(responseBody2).toEqual({
         name: "NotFoundError",
-        message:
-          "O token de ativação utilizado não foi encontrado no sistema ou expirou.",
-        action: "Faça um novo cadastro.",
+        message: "Activation token not found or expired.",
+        action: "Please register again.",
         status_code: 404,
       });
     });
@@ -162,8 +159,8 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
 
       expect(responseBody).toEqual({
         name: "ForbiddenError",
-        message: "Você não pode mais utilizar tokens de ativação.",
-        action: "Entre em contato com o suporte.",
+        message: "You can no longer use activation tokens.",
+        action: "Contact support.",
         status_code: 403,
       });
     });
@@ -194,8 +191,8 @@ describe("PATCH /api/v1/activations/[token_id]", () => {
 
       expect(responseBody).toEqual({
         name: "ForbiddenError",
-        message: "Você não possui permissão para executar esta ação.",
-        action: `Verifique se o seu usuário possui a feature "read:activation_token".`,
+        message: "You do not have permission to perform this action.",
+        action: `Check if your user has the "read:activation_token" feature.`,
         status_code: 403,
       });
     });
