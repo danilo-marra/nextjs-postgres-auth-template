@@ -2,7 +2,7 @@ import email from "infra/email.js";
 import database from "infra/database.js";
 import webserver from "infra/webserver.js";
 import user from "models/user.js";
-import session from "models/session.js";
+import password from "models/password.js";
 import { NotFoundError } from "infra/errors";
 
 const EXPIRATION_IN_MILISECONDS = 60 * 60 * 1000; // 1 hour
@@ -11,8 +11,12 @@ async function create(userEmail) {
   let foundUser;
   try {
     foundUser = await user.findOneByEmail(userEmail);
-  } catch {
-    return null;
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      return null;
+    }
+
+    throw error;
   }
 
   const expiresAt = new Date(Date.now() + EXPIRATION_IN_MILISECONDS);
@@ -104,12 +108,69 @@ async function markTokenAsUsed(tokenId) {
 }
 
 async function resetPassword(tokenId, newPassword) {
-  const token = await findOneValidById(tokenId);
-  const foundUser = await user.findOneById(token.user_id);
-  await user.update(foundUser.username, { password: newPassword });
-  await session.deleteAllByUserId(token.user_id);
-  const usedToken = await markTokenAsUsed(tokenId);
-  return usedToken;
+  let client;
+
+  try {
+    client = await database.getNewClient();
+    await client.query("BEGIN");
+
+    const usedToken = await claimTokenById(client, tokenId);
+    const hashedPassword = await password.hash(newPassword);
+
+    await client.query({
+      text: `
+        UPDATE
+          users
+        SET
+          password = $2,
+          updated_at = timezone('utc', now())
+        WHERE
+          id = $1
+        ;`,
+      values: [usedToken.user_id, hashedPassword],
+    });
+
+    await client.query({
+      text: `DELETE FROM sessions WHERE user_id = $1`,
+      values: [usedToken.user_id],
+    });
+
+    await client.query("COMMIT");
+    return usedToken;
+  } catch (error) {
+    await client?.query("ROLLBACK");
+    throw error;
+  } finally {
+    await client?.release();
+  }
+}
+
+async function claimTokenById(client, tokenId) {
+  const results = await client.query({
+    text: `
+      UPDATE
+        password_reset_tokens
+      SET
+        used_at = timezone('utc', now()),
+        updated_at = timezone('utc', now())
+      WHERE
+        id = $1
+        AND expires_at > NOW()
+        AND used_at IS NULL
+      RETURNING
+        *
+      ;`,
+    values: [tokenId],
+  });
+
+  if (results.rowCount === 0) {
+    throw new NotFoundError({
+      message: "Password reset token not found or expired.",
+      action: "Request a new password reset link.",
+    });
+  }
+
+  return results.rows[0];
 }
 
 const passwordReset = {

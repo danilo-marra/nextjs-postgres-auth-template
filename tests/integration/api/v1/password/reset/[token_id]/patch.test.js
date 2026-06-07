@@ -92,6 +92,71 @@ describe("PATCH /api/v1/password/reset/[token_id]", () => {
       });
     });
 
+    test("With concurrent requests for the same token", async () => {
+      const createdUser = await orchestrator.createUser({
+        password: "oldpassword",
+      });
+      await orchestrator.activateUser(createdUser);
+      const token = await orchestrator.createPasswordResetToken(createdUser);
+
+      const resetOperation1 = settleReset(
+        passwordReset.resetPassword(token.id, "newpassword1"),
+      );
+      const resetOperation2 = settleReset(
+        passwordReset.resetPassword(token.id, "newpassword2"),
+      );
+      const resetResults = [await resetOperation1, await resetOperation2];
+
+      const fulfilledResults = resetResults.filter(
+        (result) => result.status === "fulfilled",
+      );
+      const rejectedResults = resetResults.filter(
+        (result) => result.status === "rejected",
+      );
+
+      expect(fulfilledResults).toHaveLength(1);
+      expect(rejectedResults).toHaveLength(1);
+      expect(rejectedResults[0].reason).toMatchObject({
+        name: "NotFoundError",
+        message: "Password reset token not found or expired.",
+      });
+
+      const successfulPassword =
+        resetResults[0].status === "fulfilled"
+          ? "newpassword1"
+          : "newpassword2";
+      const failedPassword =
+        resetResults[0].status === "fulfilled"
+          ? "newpassword2"
+          : "newpassword1";
+
+      const loginResponse = await fetch(
+        "http://localhost:3000/api/v1/sessions",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: createdUser.email,
+            password: successfulPassword,
+          }),
+        },
+      );
+      expect(loginResponse.status).toBe(201);
+
+      const failedLoginResponse = await fetch(
+        "http://localhost:3000/api/v1/sessions",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: createdUser.email,
+            password: failedPassword,
+          }),
+        },
+      );
+      expect(failedLoginResponse.status).toBe(401);
+    });
+
     test("With valid token", async () => {
       const createdUser = await orchestrator.createUser({
         password: "oldpassword",
@@ -210,3 +275,17 @@ describe("PATCH /api/v1/password/reset/[token_id]", () => {
     });
   });
 });
+
+async function settleReset(resetOperation) {
+  try {
+    return {
+      status: "fulfilled",
+      value: await resetOperation,
+    };
+  } catch (reason) {
+    return {
+      status: "rejected",
+      reason,
+    };
+  }
+}
