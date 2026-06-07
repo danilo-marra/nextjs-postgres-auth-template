@@ -1,7 +1,7 @@
-name: espaco-dialogico-sys
+name: nextjs-postgres-auth
 services:
-  espaco_dialogico_sys:
-    container_name: espaco_dialogico_sys
+  postgres-dev:
+    container_name: postgres-dev
     image: "postgres:16.0-alpine3.18"
     env_file:
       - ../.env.development

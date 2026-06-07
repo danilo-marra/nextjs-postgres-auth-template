@@ -21,7 +21,7 @@ async function listPendingMigrations() {
     });
     return pendingMigrations;
   } finally {
-    await dbClient?.end();
+    await dbClient?.release();
   }
 }
 
@@ -38,7 +38,7 @@ async function runPendingMigrations() {
 
     return migratedMigrations;
   } finally {
-    await dbClient?.end();
+    await dbClient?.release();
   }
 }
 
