@@ -100,7 +100,13 @@ async function injectAuthenticatedUser(request) {
 
 function injectAnonymousUser(request) {
   const anonymousUserObject = {
-    features: ["read:activation_token", "create:session", "create:user"],
+    features: [
+      "read:activation_token",
+      "create:session",
+      "create:user",
+      "create:password_reset_token",
+      "read:password_reset_token",
+    ],
   };
 
   request.context = {
