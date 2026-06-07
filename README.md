@@ -57,26 +57,26 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 
 ## Environment Variables
 
-| Variable              | Description                             | Default     |
-| --------------------- | --------------------------------------- | ----------- |
-| `POSTGRES_HOST`       | PostgreSQL host                         | `localhost` |
-| `POSTGRES_PORT`       | PostgreSQL port                         | `5432`      |
-| `POSTGRES_USER`       | PostgreSQL user                         | —           |
-| `POSTGRES_DB`         | PostgreSQL database name                | —           |
-| `POSTGRES_PASSWORD`   | PostgreSQL password                     | —           |
-| `DATABASE_URL`        | Full connection string (auto-generated) | —           |
-| `POSTGRES_CA`         | CA certificate for SSL (production)     | —           |
-| `EMAIL_SMTP_HOST`     | SMTP host                               | `localhost` |
-| `EMAIL_SMTP_PORT`     | SMTP port                               | `1025`      |
-| `EMAIL_SMTP_USER`     | SMTP user                               | —           |
-| `EMAIL_SMTP_PASSWORD` | SMTP password                           | —           |
-| `EMAIL_HTTP_HOST`     | Email web UI host (Mailcatcher)         | `localhost` |
-| `EMAIL_HTTP_PORT`     | Email web UI port                       | `1080`      |
-| `APP_NAME`            | Application name (used in emails)       | —           |
-| `APP_EMAIL`           | Sender email address                    | —           |
-| `ACTIVATION_PATH`     | Path for activation links               | `/activate` |
+| Variable              | Description                             | Default           |
+| --------------------- | --------------------------------------- | ----------------- |
+| `POSTGRES_HOST`       | PostgreSQL host                         | `localhost`       |
+| `POSTGRES_PORT`       | PostgreSQL port                         | `5432`            |
+| `POSTGRES_USER`       | PostgreSQL user                         | —                 |
+| `POSTGRES_DB`         | PostgreSQL database name                | —                 |
+| `POSTGRES_PASSWORD`   | PostgreSQL password                     | —                 |
+| `DATABASE_URL`        | Full connection string (auto-generated) | —                 |
+| `POSTGRES_CA`         | CA certificate for SSL (production)     | —                 |
+| `EMAIL_SMTP_HOST`     | SMTP host                               | `localhost`       |
+| `EMAIL_SMTP_PORT`     | SMTP port                               | `1025`            |
+| `EMAIL_SMTP_USER`     | SMTP user                               | —                 |
+| `EMAIL_SMTP_PASSWORD` | SMTP password                           | —                 |
+| `EMAIL_HTTP_HOST`     | Email web UI host (Mailcatcher)         | `localhost`       |
+| `EMAIL_HTTP_PORT`     | Email web UI port                       | `1080`            |
+| `APP_NAME`            | Application name (used in emails)       | —                 |
+| `APP_EMAIL`           | Sender email address                    | —                 |
+| `ACTIVATION_PATH`     | Path for activation links               | `/activate`       |
 | `PASSWORD_RESET_PATH` | Path for password reset links           | `/password/reset` |
-| `PRODUCTION_URL`      | Full production URL                     | —           |
+| `PRODUCTION_URL`      | Full production URL                     | —                 |
 
 ## Available Scripts
 
