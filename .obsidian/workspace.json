@@ -13,13 +13,58 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CLAUDE.md",
+                "file": "wiki/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CLAUDE"
-            }
+              "title": "index"
+            },
+            "group": "635d4973e24d73e8"
+          }
+        ]
+      },
+      {
+        "id": "ea07e68660060e2d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a5091dc80a28c100",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
+              "state": {
+                "file": "wiki/index.md",
+                "options": {
+                  "collapse-filter": true,
+                  "search": "",
+                  "localJumps": 1,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": false,
+                  "showTags": false,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [],
+                  "collapse-display": true,
+                  "showArrow": false,
+                  "textFadeMultiplier": 0,
+                  "nodeSizeMultiplier": 1,
+                  "lineSizeMultiplier": 1,
+                  "collapse-forces": true,
+                  "centerStrength": 0.518713248970312,
+                  "repelStrength": 10,
+                  "linkStrength": 1,
+                  "linkDistance": 250,
+                  "scale": 1,
+                  "close": false
+                }
+              },
+              "icon": "lucide-git-fork",
+              "title": "Gráfico de index"
+            },
+            "group": "635d4973e24d73e8"
           }
         ]
       }
@@ -94,6 +139,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "wiki/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +149,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Links inversos"
+              "title": "Links inversos para index"
             }
           },
           {
@@ -166,8 +212,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -180,31 +225,36 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "43138eb987c37d48",
+  "active": "a5091dc80a28c100",
   "lastOpenFiles": [
-    "wiki/log.md",
-    "wiki/log.md.tmp.29848.3a8348896c2d",
+    "next-env.d.ts",
+    "tests/integration/api/v1/sessions/post.test.ts.tmp.29848.5c99e683a993",
+    "tests/integration/infra/email.test.ts.tmp.29848.ab2a36779a2f",
+    "tests/integration/api/v1/password/reset/post.test.ts.tmp.29848.5a4bfc9804d9",
+    "tests/integration/api/v1/activations/[token_id]/patch.test.ts.tmp.29848.a9f09d127344",
+    "models/migrator.ts.tmp.29848.7215264cf481",
+    "models/migrator.ts.tmp.29848.54093f08cf5b",
+    "models/migrator.ts.tmp.29848.79c96ffa9168",
+    "node_modules/@types/jest/node_modules/jest-mock/build/index.mjs",
+    "node_modules/@types/jest/node_modules/jest-mock/build/index.js",
+    "node_modules/@types/jest/node_modules/jest-mock/build/index.d.ts",
     "wiki/index.md",
-    "wiki/index.md.tmp.29848.fbbb413f5ea7",
-    "wiki/activation.md",
-    "wiki/activation.md.tmp.29848.c5a866da48b6",
-    "wiki/password-reset.md",
-    "wiki/password-reset.md.tmp.29848.e09fb4f09be0",
-    "wiki/migrations.md",
-    "wiki/migrations.md.tmp.29848.9b8f0acde873",
-    "wiki/api-routes.md",
-    "wiki/api-routes.md.tmp.29848.d6a89316db6f",
-    "wiki/error-handling.md",
-    "wiki/error-handling.md.tmp.29848.4706053c05c2",
-    "wiki/database.md",
-    "wiki/database.md.tmp.29848.c658047eb973",
-    "wiki/session.md",
-    "wiki/session.md.tmp.29848.6d4977265af5",
-    "wiki/rbac.md",
-    "wiki/rbac.md.tmp.29848.971f6af2f996",
-    "wiki/auth-flow.md",
-    "wiki/overview.md",
     "CLAUDE.md",
+    "node_modules/@types/react/README.md",
+    "node_modules/csstype/README.md",
+    "node_modules/@types/retry/README.md",
+    "node_modules/@types/set-cookie-parser/README.md",
+    "wiki/session.md",
+    "wiki/rbac.md",
+    "wiki/password-reset.md",
+    "wiki/overview.md",
+    "wiki/migrations.md",
+    "wiki/log.md",
+    "wiki/database.md",
+    "wiki/error-handling.md",
+    "wiki/auth-flow.md",
+    "wiki/api-routes.md",
+    "wiki/activation.md",
     "Bem-vindo.md"
   ]
 }
