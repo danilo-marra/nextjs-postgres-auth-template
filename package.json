@@ -22,7 +22,8 @@
     "lint:eslint:check": "next lint --dir .",
     "prepare": "husky",
     "commit": "cz",
-    "check-secrets": "secretlint \"**/*\""
+    "check-secrets": "secretlint \"**/*\"",
+    "typecheck": "tsc --noEmit"
   },
   "author": "Danilo Marra",
   "license": "MIT",
@@ -47,6 +48,16 @@
     "@commitlint/config-conventional": "19.4.1",
     "@faker-js/faker": "9.7.0",
     "@secretlint/secretlint-rule-preset-recommend": "8.2.4",
+    "@types/async-retry": "^1.4.9",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.9.2",
+    "@types/nodemailer": "^8.0.0",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/set-cookie-parser": "^2.4.10",
+    "@typescript-eslint/eslint-plugin": "^8.60.1",
+    "@typescript-eslint/parser": "^8.60.1",
     "chalk": "^5.3.0",
     "commitizen": "4.3.1",
     "concurrently": "8.2.2",
@@ -61,7 +72,8 @@
     "kill-port": "^2.0.1",
     "prettier": "3.3.3",
     "secretlint": "8.2.4",
-    "set-cookie-parser": "2.7.1"
+    "set-cookie-parser": "2.7.1",
+    "typescript": "^6.0.3"
   },
   "config": {
     "commitizen": {
