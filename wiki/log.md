@@ -4,6 +4,26 @@ Append-only record of all wiki operations.
 
 ---
 
+## 2026-06-08 — PR #10 merge: JavaScript → TypeScript migration
+
+**Branch**: feat/typescript-migration
+
+**What changed**: All source files renamed `.js`/`.jsx` → `.ts`/`.tsx`. `tsconfig.json` added with `strict: true`. ESLint updated with `@typescript-eslint`. Migration files in `infra/migrations/` remain as `.js`.
+
+Wiki pages updated:
+
+- `overview.md` — language now TypeScript; added `typecheck` entry point; `.js` → `.ts` in controller reference
+- `database.md` — source updated to `.ts`; documented generic `query<T>()` pattern
+- `migrations.md` — source updated to `.ts`; added note that migration files stay `.js` and why
+- `error-handling.md` — source references updated to `.ts`
+- `rbac.md` — source references updated to `.ts`; added `Feature` union type and `ContextUser` / `AnonymousUser` types
+
+Wiki pages created:
+
+- `typescript.md` — tsconfig decisions, key type exports (`Feature`, `UserRow`, `AppApiRequest`, `query<T>()`), ESLint exclusions, and migration caveats
+
+---
+
 ## 2026-06-07 — Initial population
 
 **Branch**: docs/knowledge-base-setup

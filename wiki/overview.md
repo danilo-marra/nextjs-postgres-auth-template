@@ -4,11 +4,11 @@
 
 **Sources**: CLAUDE.md, package.json, README.md
 
-**Last updated**: 2026-06-07
+**Last updated**: 2026-06-08
 
 ---
 
-`nextjs-postgres-auth-template` is a production-ready starter template for web applications that need authentication out of the box. It is intentionally minimal: no ORM, no TypeScript, no app router — just raw SQL, plain JavaScript, and well-defined conventions.
+`nextjs-postgres-auth-template` is a production-ready starter template for web applications that need authentication out of the box. It is intentionally minimal: no ORM, no app router — just raw SQL, TypeScript, and well-defined conventions.
 
 ## What it provides
 
@@ -24,7 +24,7 @@
 | Layer      | Choice                               |
 | ---------- | ------------------------------------ |
 | Framework  | Next.js 15, Pages Router             |
-| Language   | JavaScript (no TypeScript)           |
+| Language   | TypeScript (strict mode)             |
 | Database   | PostgreSQL 16 via raw `pg` queries   |
 | Migrations | node-pg-migrate                      |
 | Auth       | bcryptjs passwords, httpOnly cookies |
@@ -36,8 +36,9 @@
 
 - `npm run dev` — starts Docker, waits for Postgres, runs migrations, starts Next.js
 - `npm test` — same but runs the full Jest suite instead
+- `npm run typecheck` — runs `tsc --noEmit` across all source files
 - `pages/api/v1/` — all API routes
-- `infra/controller.js` — request middleware: injects user, enforces RBAC, normalizes errors
+- `infra/controller.ts` — request middleware: injects user, enforces RBAC, normalizes errors
 
 ## Related pages
 

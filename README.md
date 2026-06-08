@@ -1,10 +1,11 @@
 # nextjs-postgres-auth-template
 
-A production-ready Next.js starter with PostgreSQL, cookie-based sessions, role-based access control (RBAC), and email activation — ready to deploy on Vercel.
+A production-ready Next.js + TypeScript starter with PostgreSQL, cookie-based sessions, feature-based RBAC, and email activation — ready to deploy on Vercel.
 
 ## Features
 
 - **Next.js 15** (Pages Router + API Routes)
+- **TypeScript** — strict mode, `moduleResolution: "bundler"`, full type coverage across all source files
 - **PostgreSQL 16** with raw parameterized SQL via `pg` (no ORM)
 - **Schema migrations** with `node-pg-migrate`
 - **Cookie sessions** — `httpOnly`, 30-day expiry, stored in the database
@@ -13,7 +14,7 @@ A production-ready Next.js starter with PostgreSQL, cookie-based sessions, role-
 - **Typed error hierarchy** — `ValidationError`, `NotFoundError`, `UnauthorizedError`, `ForbiddenError`, and more
 - **Docker Compose** — PostgreSQL + Mailcatcher for local development
 - **Full test suite** — integration tests with Jest and an orchestrator helper
-- **Code quality** — ESLint, Prettier, Husky, Commitlint, Commitizen, Secretlint
+- **Code quality** — ESLint (with `@typescript-eslint`), Prettier, Husky, Commitlint, Commitizen, Secretlint
 
 ## Getting Started
 
@@ -94,6 +95,7 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 | `npm run services:down`       | Stop and remove Docker services                        |
 | `npm run lint:prettier:check` | Check formatting                                       |
 | `npm run lint:prettier:fix`   | Fix formatting                                         |
+| `npm run typecheck`           | Run `tsc --noEmit` type check                          |
 | `npm run lint:eslint:check`   | Run ESLint                                             |
 | `npm run check-secrets`       | Scan for secrets with Secretlint                       |
 | `npm run commit`              | Commit with Commitizen                                 |
@@ -103,25 +105,25 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 ```
 ├── infra/
 │   ├── compose.yaml        # Docker services (PostgreSQL + Mailcatcher)
-│   ├── controller.js       # Middleware (auth injection, RBAC, error handling)
-│   ├── database.js         # PostgreSQL client helper
-│   ├── email.js            # Nodemailer transport
-│   ├── errors.js           # Typed error hierarchy
-│   ├── webserver.js        # Origin URL helper
-│   ├── migrations/         # node-pg-migrate migration files
+│   ├── controller.ts       # Middleware (auth injection, RBAC, error handling)
+│   ├── database.ts         # PostgreSQL client helper (generic query<T>)
+│   ├── email.ts            # Nodemailer transport
+│   ├── errors.ts           # Typed error hierarchy
+│   ├── webserver.ts        # Origin URL helper
+│   ├── migrations/         # node-pg-migrate migration files (stay as .js)
 │   └── scripts/
 │       └── wait-for-postgres.js
 ├── models/
-│   ├── activation.js       # Email activation token logic
-│   ├── authentication.js   # Credential verification
-│   ├── authorization.js    # RBAC engine
-│   ├── migrator.js         # Migration runner
-│   ├── password.js         # bcrypt helpers
-│   ├── password-reset.js   # Password reset token logic
-│   ├── session.js          # Session CRUD
-│   └── user.js             # User CRUD
+│   ├── activation.ts       # Email activation token logic
+│   ├── authentication.ts   # Credential verification
+│   ├── authorization.ts    # RBAC engine + Feature union type
+│   ├── migrator.ts         # Migration runner
+│   ├── password.ts         # bcrypt helpers
+│   ├── password-reset.ts   # Password reset token logic
+│   ├── session.ts          # Session CRUD
+│   └── user.ts             # User CRUD
 ├── pages/
-│   ├── index.js
+│   ├── index.tsx
 │   └── api/v1/             # REST API routes
 │       ├── activations/    # Account activation
 │       ├── migrations/     # Migration runner endpoint
@@ -130,8 +132,9 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 │       ├── status/         # Health check
 │       ├── user/           # Authenticated user profile
 │       └── users/          # User registration & management
+├── tsconfig.json           # strict mode, moduleResolution: bundler
 └── tests/
-    ├── orchestrator.js     # Test utilities (DB reset, factories)
+    ├── orchestrator.ts     # Test utilities (DB reset, factories)
     └── integration/        # Integration tests
 ```
 

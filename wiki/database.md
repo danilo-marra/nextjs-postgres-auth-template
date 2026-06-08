@@ -2,20 +2,27 @@
 
 **Summary**: PostgreSQL connection layer — how the pool is configured, how queries are executed, and how SSL is handled.
 
-**Sources**: infra/database.js, .env.development, .env.example
+**Sources**: infra/database.ts, .env.development, .env.example
 
-**Last updated**: 2026-06-07
+**Last updated**: 2026-06-08
 
 ---
 
-`infra/database.js` wraps `pg.Pool` and exposes three methods.
+`infra/database.ts` wraps `pg.Pool` and exposes three methods.
 
 ## API
 
-```js
-database.query(queryObject); // parameterized query via pool
+```ts
+database.query<T>(queryObject); // generic parameterized query via pool
 database.getNewClient(); // dedicated client for transactions
 database.end(); // close pool (used in tests)
+```
+
+`query<T>()` is generic — pass the expected row type to get a fully typed `QueryResult<T>` back. All models use this pattern:
+
+```ts
+const results = await database.query<UserRow>({ text: "...", values: [...] });
+return results.rows[0];
 ```
 
 All query errors are caught and re-thrown as `ServiceError` (503).
@@ -38,7 +45,7 @@ try {
 }
 ```
 
-Used in [[password-reset]] to atomically update password + delete all sessions.
+Used in [[password-reset]] to atomically update password + delete all sessions. The client is typed as `PoolClient` from `pg`.
 
 ## SSL
 

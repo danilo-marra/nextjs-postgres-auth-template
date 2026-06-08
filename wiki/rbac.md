@@ -2,13 +2,33 @@
 
 **Summary**: Feature-based authorization system — how permissions are stored, checked, and applied to filter output.
 
-**Sources**: models/authorization.js, infra/controller.js
+**Sources**: models/authorization.ts, infra/controller.ts
 
-**Last updated**: 2026-06-07
+**Last updated**: 2026-06-08
 
 ---
 
 Authorization is **feature-based**, not role-based. Each user row has a `features` text array in Postgres. Every protected action maps to a feature string.
+
+All valid feature strings are defined as the `Feature` union type in `models/authorization.ts`:
+
+```ts
+export type Feature =
+  | "create:user"
+  | "read:user"
+  | "read:user:self"
+  | "update:user"
+  | "update:user:others"
+  | "create:session"
+  | "read:session"
+  | "read:activation_token"
+  | "create:password_reset_token"
+  | "read:password_reset_token"
+  | "read:migration"
+  | "create:migration"
+  | "read:status"
+  | "read:status:all";
+```
 
 ## Available features
 
@@ -23,7 +43,7 @@ Infra:    read:migration, create:migration, read:status, read:status:all
 
 Anonymous requests (no session cookie) receive a virtual user object with:
 
-```js
+```ts
 features: [
   "read:activation_token",
   "create:session",
@@ -32,6 +52,8 @@ features: [
   "read:password_reset_token",
 ];
 ```
+
+This is typed as `AnonymousUser` in `infra/controller.ts`. The union `ContextUser = UserRow | AnonymousUser` represents any request's injected user.
 
 This means registration, login, and password reset are always public.
 
