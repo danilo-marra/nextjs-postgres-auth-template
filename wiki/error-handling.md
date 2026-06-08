@@ -2,9 +2,9 @@
 
 **Summary**: Typed error hierarchy and how errors flow from models through the controller to API responses.
 
-**Sources**: infra/errors.js, infra/controller.js
+**Sources**: infra/errors.ts, infra/controller.ts
 
-**Last updated**: 2026-06-07
+**Last updated**: 2026-06-08
 
 ---
 
@@ -33,7 +33,7 @@ All errors extend `Error` and implement `toJSON()` to produce a consistent JSON 
 
 ## Controller error handling
 
-`onErrorHandler` in `infra/controller.js`:
+`onErrorHandler` in `infra/controller.ts`:
 
 - `ValidationError`, `NotFoundError`, `ForbiddenError` → returned directly as JSON
 - `UnauthorizedError` → cookie cleared + returned as JSON
@@ -43,7 +43,7 @@ All errors extend `Error` and implement `toJSON()` to produce a consistent JSON 
 
 ## Usage rule
 
-Never throw plain `Error` objects. Always use the typed classes from `infra/errors.js`.
+Never throw plain `Error` objects. Always use the typed classes from `infra/errors.ts`.
 
 ## Related pages
 

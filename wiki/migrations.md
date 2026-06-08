@@ -2,9 +2,9 @@
 
 **Summary**: Database schema migration system — files, commands, and the tables they create.
 
-**Sources**: infra/migrations/, models/migrator.js, package.json
+**Sources**: infra/migrations/, models/migrator.ts, package.json
 
-**Last updated**: 2026-06-07
+**Last updated**: 2026-06-08
 
 ---
 
@@ -40,6 +40,12 @@ Migrations are also applied automatically at dev startup (`npm run dev`) and acc
 **user_activation_tokens**: `id`, `user_id`, `expires_at`, `used_at`, `created_at`, `updated_at`
 
 **password_reset_tokens**: `id`, `user_id`, `expires_at`, `used_at`, `created_at`, `updated_at`
+
+## Migration files stay as `.js`
+
+`infra/migrations/*.js` are CommonJS files loaded by `node-pg-migrate` via `require()`. They are excluded from TypeScript compilation (`tsconfig.json` `exclude` list) and from ESLint. Do not rename them to `.ts`.
+
+`models/migrator.ts` wraps the runner; its return type is inferred (the runner's `RunMigration` type is not exported from the public package index).
 
 ## Rule
 

@@ -25,3 +25,4 @@ Table of contents for the project knowledge base.
 - [database](database.md) — pg Pool configuration, query helpers, SSL, and transaction pattern
 - [migrations](migrations.md) — Migration files, commands, and schema summary
 - [error-handling](error-handling.md) — Typed error hierarchy and controller error flow
+- [typescript](typescript.md) — tsconfig decisions, key type exports, and migration caveats
