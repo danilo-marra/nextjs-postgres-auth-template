@@ -4,6 +4,21 @@ Append-only record of all wiki operations.
 
 ---
 
+## 2026-07-01 — PR #13 merge: clean up leftover placeholders from a different project
+
+**Branch**: chore/cleanup-old-project-placeholders
+
+**What changed**: Renamed the `mailcatcher` Docker container (`infra/compose.yaml`) so it stops colliding with an unrelated project's leftover container of the same name; fixed a test sender address in `tests/integration/infra/email.test.ts` that referenced another project's domain; removed a stray dev script (`watch_status.bat`) pointing at another project's URL and two empty debris files (`-d`, `-H`); added a `.claude/skills/ship` skill that chains commit → PR → code review → CI checks → merge → wiki-sync.
+
+No wiki pages required updates — none of the changed files (Docker container naming, a test fixture string, tooling debris, a Claude Code skill) are referenced by any existing page.
+
+Wiki lint findings from this pass (unrelated to PR #13, carried over from an earlier gap):
+
+- `activation.md`, `auth-flow.md`, `password-reset.md`, `session.md` — Sources lines still reference `.js` files that are now `.ts` (missed by the TypeScript migration sync below). Needs a follow-up pass.
+- Root `CLAUDE.md` says "Next.js 14" but `package.json` and `overview.md` say Next.js 15 — needs a fix outside `wiki/`.
+
+---
+
 ## 2026-06-08 — PR #10 merge: JavaScript → TypeScript migration
 
 **Branch**: feat/typescript-migration
