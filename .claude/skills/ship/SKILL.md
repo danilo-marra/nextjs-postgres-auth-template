@@ -31,10 +31,13 @@ When the user invokes `/ship $ARGUMENTS`:
 
 9. **Sync local main** — `git checkout main && git pull origin main` so the local branch reflects the merge, then `git branch -d <feature-branch>` to remove the now-stale local branch (its remote was already deleted in step 8).
 
+10. **Sync the wiki** — if the personal `wiki-sync` skill is available, invoke `/wiki-sync` with the merged PR number. It opens its own PR against `wiki/` — do not merge that PR automatically; report its URL and leave it for the user to review. If `wiki-sync` isn't installed (e.g. a fresh clone of this template on another machine), skip this step silently — it's a personal skill, not a project dependency.
+
 Constraints:
 
 - Never commit directly to `main`.
 - Tests must pass before committing and before merging.
 - Migrations (if any) must be applied and tested before opening the PR — see `db-migrate` skill.
 - Never merge with failing or pending required checks.
+- Never auto-merge the wiki-sync PR — it requires human review.
 - Always use Conventional Commits format.
