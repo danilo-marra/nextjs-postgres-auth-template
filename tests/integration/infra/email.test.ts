@@ -10,21 +10,21 @@ describe("infra/email.js", () => {
     await orchestrator.deleteAllEmails();
 
     await email.send({
-      from: "EspacoDialogico <contato@espacodialogico.com.br>",
+      from: "Template <no-reply@template.com>",
       to: "contato@curso.dev",
       subject: "Test subject",
       text: "Test body.",
     });
 
     await email.send({
-      from: "EspacoDialogico <contato@espacodialogico.com.br>",
+      from: "Template <no-reply@template.com>",
       to: "contato@curso.dev",
       subject: "Last sent email",
       text: "Body of last email",
     });
 
     const lastEmail = await orchestrator.getLastEmail();
-    expect(lastEmail!.sender).toBe("<contato@espacodialogico.com.br>");
+    expect(lastEmail!.sender).toBe("<no-reply@template.com>");
     expect(lastEmail!.recipients[0]).toBe("<contato@curso.dev>");
     expect(lastEmail!.subject).toBe("Last sent email");
     expect(lastEmail!.text!.trim()).toBe("Body of last email");
