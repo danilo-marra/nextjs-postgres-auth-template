@@ -29,7 +29,7 @@ When the user invokes `/ship $ARGUMENTS`:
 
 8. **Merge** — once all checks are green, merge with `gh pr merge <number> --squash --delete-branch`. This is a hard-to-reverse, shared-state action — if `$ARGUMENTS` did not already signal the user wants a full unattended run, confirm before merging.
 
-9. **Sync local main** — `git checkout main && git pull origin main` so the local branch reflects the merge.
+9. **Sync local main** — `git checkout main && git pull origin main` so the local branch reflects the merge, then `git branch -d <feature-branch>` to remove the now-stale local branch (its remote was already deleted in step 8).
 
 Constraints:
 
